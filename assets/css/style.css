@@ -89,3 +89,79 @@ button:hover {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
+
+#theme-toggle {
+  display: block;
+  margin: 0 auto 10px;
+  background-color: #455a64;
+}
+
+#theme-toggle:hover {
+  background-color: #37474f;
+}
+
+/* Mode sombre */
+body.dark {
+  background: #121212;
+  color: #e0e0e0;
+}
+
+body.dark .notice {
+  color: #b0b0b0;
+}
+
+body.dark #intro-screen,
+body.dark #question-screen,
+body.dark #result-screen {
+  background: #1e1e1e;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+body.dark button {
+  background-color: #90caf9;
+  color: #121212;
+}
+
+body.dark button:hover {
+  background-color: #64b5f6;
+}
+
+body.dark #theme-toggle {
+  background-color: #616161;
+  color: #fff;
+}
+
+body.dark #theme-toggle:hover {
+  background-color: #757575;
+}
+
+body.dark #answers button {
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+}
+
+body.dark #answers button:hover {
+  background-color: #3a3a3a;
+}
+
+body.dark .correct {
+  background-color: #2e7d32 !important;
+  color: #fff !important;
+}
+
+body.dark .wrong {
+  background-color: #c62828 !important;
+  color: #fff !important;
+}
+
+body.dark #timer-div {
+  color: #ef5350;
+}
+
+body.dark #progress {
+  color: #b0bec5;
+}
+
+body.dark #result-screen h2 {
+  color: #81c784;
+}

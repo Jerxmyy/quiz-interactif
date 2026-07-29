@@ -56,13 +56,29 @@ const timeLeftSpan = getElement("#time-left");
 
 const currentQuestionIndexSpan = getElement("#current-question-index");
 const totalQuestionsSpan = getElement("#total-questions");
+const themeToggle = getElement("#theme-toggle");
 
 // Init
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
+themeToggle.addEventListener("click", toggleTheme);
 
 setText(bestScoreValue, bestScore);
+applyTheme(loadFromLocalStorage("theme", "light"));
+
+function applyTheme(theme) {
+  const isDark = theme === "dark";
+  document.body.classList.toggle("dark", isDark);
+  themeToggle.setAttribute("aria-pressed", String(isDark));
+  setText(themeToggle, isDark ? "Mode clair" : "Mode sombre");
+}
+
+function toggleTheme() {
+  const nextTheme = document.body.classList.contains("dark") ? "light" : "dark";
+  saveToLocalStorage("theme", nextTheme);
+  applyTheme(nextTheme);
+}
 
 function startQuiz() {
   hideElement(introScreen);
