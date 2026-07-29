@@ -50,6 +50,8 @@ const answersDiv = getElement("#answers");
 const nextBtn = getElement("#next-btn");
 const startBtn = getElement("#start-btn");
 const restartBtn = getElement("#restart-btn");
+const shareBtn = getElement("#share-btn");
+const shareLink = getElement("#share-link");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
@@ -62,6 +64,7 @@ const themeToggle = getElement("#theme-toggle");
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
+shareBtn.addEventListener("click", shareScore);
 themeToggle.addEventListener("click", toggleTheme);
 
 setText(bestScoreValue, bestScore);
@@ -148,12 +151,38 @@ function endQuiz() {
   showElement(resultScreen);
 
   updateScoreDisplay(scoreText, score, questions.length);
+  shareLink.classList.add("hidden");
+  setText(shareLink, "");
 
   if (score > bestScore) {
     bestScore = score;
     saveToLocalStorage("bestScore", bestScore);
   }
   setText(bestScoreEnd, bestScore);
+}
+
+function buildShareUrl() {
+  const url = new URL(window.location.href);
+  url.searchParams.set("score", String(score));
+  url.searchParams.set("total", String(questions.length));
+  return url.toString();
+}
+
+function shareScore() {
+  const shareUrl = buildShareUrl();
+  const shareText = `Mon score au Quiz Dynamique : ${score}/${questions.length}`;
+
+  setText(shareLink, shareUrl);
+  shareLink.classList.remove("hidden");
+
+  if (navigator.share) {
+    navigator.share({ title: "Quiz Dynamique", text: shareText, url: shareUrl }).catch(() => {});
+    return;
+  }
+
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(`${shareText}\n${shareUrl}`).catch(() => {});
+  }
 }
 
 function restartQuiz() {

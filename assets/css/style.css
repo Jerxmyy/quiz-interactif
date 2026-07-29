@@ -90,6 +90,17 @@ button:hover {
   margin-bottom: 10px;
 }
 
+#share-link {
+  word-break: break-all;
+  font-size: 0.9em;
+  color: #455a64;
+  margin: 8px 0 12px;
+}
+
+body.dark #share-link {
+  color: #b0bec5;
+}
+
 #theme-toggle {
   display: block;
   margin: 0 auto 10px;
