@@ -97,8 +97,83 @@ button:hover {
   margin: 8px 0 12px;
 }
 
+#hint-btn,
+#audio-btn,
+#infinite-btn,
+#stop-infinite-btn {
+  background-color: #f9a825;
+  color: #212121;
+}
+
+#hint-btn:hover,
+#audio-btn:hover,
+#infinite-btn:hover,
+#stop-infinite-btn:hover {
+  background-color: #f57f17;
+}
+
+#hint-btn:disabled,
+#audio-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+#hint-text,
+#new-badges {
+  margin: 8px auto 12px;
+  max-width: 80%;
+  font-style: italic;
+  color: #5d4037;
+}
+
+.badges-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background: #fff3e0;
+  color: #e65100;
+  font-size: 0.85em;
+  border: 1px solid #ffcc80;
+}
+
+.badges-empty {
+  color: #777;
+  font-size: 0.9em;
+}
+
 body.dark #share-link {
   color: #b0bec5;
+}
+
+body.dark #hint-btn,
+body.dark #audio-btn,
+body.dark #infinite-btn,
+body.dark #stop-infinite-btn {
+  background-color: #ffb300;
+  color: #121212;
+}
+
+body.dark #hint-text,
+body.dark #new-badges {
+  color: #ffcc80;
+}
+
+body.dark .badge {
+  background: #3e2723;
+  color: #ffcc80;
+  border-color: #6d4c41;
+}
+
+body.dark .badges-empty {
+  color: #b0b0b0;
 }
 
 #theme-toggle {
