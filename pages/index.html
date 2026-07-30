@@ -6,60 +6,122 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
   <body>
-    <button id="theme-toggle" type="button" aria-pressed="false">
-      Mode sombre
-    </button>
+    <div class="top-controls">
+      <label class="control-label" for="lang-select">
+        <span data-i18n="langLabel">Langue</span>
+        <select id="lang-select">
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+      <button id="theme-toggle" type="button" aria-pressed="false">
+        Mode sombre
+      </button>
+    </div>
 
-    <h1>Quiz Dynamique</h1>
+    <h1 data-i18n="title">Quiz Dynamique</h1>
 
     <div id="intro-screen">
-      <p class="notice">
+      <p class="notice" data-i18n="notice">
         Testez vos connaissances en quelques questions chronométrées !
       </p>
-      <p>Meilleur score : <span id="best-score-value">0</span></p>
+      <p>
+        <span data-i18n="bestScore">Meilleur score</span> :
+        <span id="best-score-value">0</span>
+      </p>
       <div id="badges-intro" class="badges-list"></div>
-      <button id="start-btn">Commencer le quiz</button>
-      <button id="infinite-btn" type="button">Mode infini</button>
+
+      <div class="setup-row">
+        <label class="control-label" for="theme-select">
+          <span data-i18n="themeLabel">Thème</span>
+          <select id="theme-select">
+            <option value="all" data-i18n-option="themeAll">Tous les thèmes</option>
+            <option value="culture" data-i18n-option="themeCulture">Culture générale</option>
+            <option value="maths" data-i18n-option="themeMaths">Maths</option>
+            <option value="images" data-i18n-option="themeImages">Images</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="mode-buttons">
+        <button id="start-btn" data-i18n="startClassic">Commencer le quiz</button>
+        <button id="progressive-btn" type="button" data-i18n="startProgressive">
+          Difficulté progressive
+        </button>
+        <button id="timed-btn" type="button" data-i18n="startTimed">
+          Contre-la-montre
+        </button>
+        <button id="flashcard-btn" type="button" data-i18n="startFlashcard">
+          Mode Flashcard
+        </button>
+        <button id="infinite-btn" type="button" data-i18n="startInfinite">
+          Mode infini
+        </button>
+      </div>
     </div>
 
     <div id="question-screen" style="display: none">
       <div id="progress">
-        Question <span id="current-question-index"></span>
+        <span data-i18n="questionWord">Question</span>
+        <span id="current-question-index"></span>
         <span id="progress-total"> / <span id="total-questions"></span></span>
       </div>
+      <div id="global-timer" class="hidden">
+        <span data-i18n="globalTime">Temps global</span> :
+        <span id="global-time-left">60</span>s
+      </div>
       <p id="question-text"></p>
-      <button id="audio-btn" type="button" class="hidden">Lecture</button>
+      <div id="question-image-wrap" class="hidden">
+        <img id="question-image" alt="" />
+      </div>
+      <button id="audio-btn" type="button" class="hidden" data-i18n="audio">
+        Lecture
+      </button>
       <div id="answers"></div>
-      <button id="hint-btn" type="button" class="hidden">Indice</button>
+      <button id="reveal-btn" type="button" class="hidden" data-i18n="reveal">
+        Voir la réponse
+      </button>
+      <p id="flashcard-answer" class="hidden" aria-live="polite"></p>
+      <button id="hint-btn" type="button" class="hidden" data-i18n="hint">
+        Indice
+      </button>
       <p id="hint-text" class="hidden" aria-live="polite"></p>
-      <div id="timer-div">Temps restant : <span id="time-left">0</span>s</div>
-      <button id="next-btn" class="hidden">Question suivante</button>
-      <button id="stop-infinite-btn" type="button" class="hidden">
+      <div id="timer-div">
+        <span data-i18n="timeLeft">Temps restant</span> :
+        <span id="time-left">0</span>s
+      </div>
+      <button id="next-btn" class="hidden" data-i18n="next">
+        Question suivante
+      </button>
+      <button id="stop-infinite-btn" type="button" class="hidden" data-i18n="stopInfinite">
         Arrêter le mode infini
       </button>
     </div>
 
     <div id="result-screen" style="display: none">
-      <h2>Résultat final</h2>
+      <h2 data-i18n="resultTitle">Résultat final</h2>
       <p id="score-text"></p>
       <p id="stats-text"></p>
-      <p>Meilleur score : <span id="best-score-end">0</span></p>
-      <h3>Récapitulatif</h3>
+      <p>
+        <span data-i18n="bestScore">Meilleur score</span> :
+        <span id="best-score-end">0</span>
+      </p>
+      <h3 data-i18n="recapTitle">Récapitulatif</h3>
       <table id="recap-table">
         <thead>
           <tr>
-            <th>Question</th>
-            <th>Votre réponse</th>
-            <th>Bonne réponse</th>
+            <th data-i18n="recapQuestion">Question</th>
+            <th data-i18n="recapChosen">Votre réponse</th>
+            <th data-i18n="recapCorrect">Bonne réponse</th>
           </tr>
         </thead>
         <tbody id="recap-body"></tbody>
       </table>
       <div id="badges-result" class="badges-list"></div>
       <p id="new-badges" class="hidden" aria-live="polite"></p>
-      <button id="share-btn">Partager</button>
+      <button id="share-btn" data-i18n="share">Partager</button>
       <p id="share-link" class="hidden" aria-live="polite"></p>
-      <button id="restart-btn">Recommencer</button>
+      <button id="restart-btn" data-i18n="restart">Recommencer</button>
     </div>
 
     <script type="module" src="../assets/js/quiz.js"></script>

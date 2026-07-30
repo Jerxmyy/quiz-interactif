@@ -97,10 +97,86 @@ button:hover {
   margin: 8px 0 12px;
 }
 
+.top-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.control-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95em;
+}
+
+.control-label select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.setup-row {
+  margin: 12px 0;
+}
+
+.mode-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#global-timer {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #6a1b9a;
+}
+
+#question-image-wrap {
+  margin: 10px auto;
+}
+
+#question-image {
+  max-width: 140px;
+  height: auto;
+}
+
+#answers .image-answer {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  min-width: 100px;
+  margin: 8px;
+  padding: 8px;
+  background: #fafafa;
+  color: #333;
+}
+
+#answers .image-answer img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+#flashcard-answer {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #2e7d32;
+  margin: 12px 0;
+}
+
 #hint-btn,
 #audio-btn,
 #infinite-btn,
-#stop-infinite-btn {
+#stop-infinite-btn,
+#progressive-btn,
+#timed-btn,
+#flashcard-btn,
+#reveal-btn {
   background-color: #f9a825;
   color: #212121;
 }
@@ -108,7 +184,11 @@ button:hover {
 #hint-btn:hover,
 #audio-btn:hover,
 #infinite-btn:hover,
-#stop-infinite-btn:hover {
+#stop-infinite-btn:hover,
+#progressive-btn:hover,
+#timed-btn:hover,
+#flashcard-btn:hover,
+#reveal-btn:hover {
   background-color: #f57f17;
 }
 
@@ -156,14 +236,34 @@ body.dark #share-link {
 body.dark #hint-btn,
 body.dark #audio-btn,
 body.dark #infinite-btn,
-body.dark #stop-infinite-btn {
+body.dark #stop-infinite-btn,
+body.dark #progressive-btn,
+body.dark #timed-btn,
+body.dark #flashcard-btn,
+body.dark #reveal-btn {
   background-color: #ffb300;
   color: #121212;
 }
 
 body.dark #hint-text,
-body.dark #new-badges {
+body.dark #new-badges,
+body.dark #flashcard-answer {
   color: #ffcc80;
+}
+
+body.dark #global-timer {
+  color: #ce93d8;
+}
+
+body.dark .control-label select {
+  background: #2c2c2c;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+body.dark #answers .image-answer {
+  background: #2c2c2c;
+  color: #e0e0e0;
 }
 
 body.dark .badge {

@@ -11,6 +11,21 @@ export const createAnswerButton = (text, onClick) => {
   return btn;
 };
 
+export const createImageAnswerButton = (imageSrc, label, onClick) => {
+  const btn = document.createElement("button");
+  btn.className = "image-answer";
+  btn.setAttribute("aria-label", label);
+  const img = document.createElement("img");
+  img.src = imageSrc;
+  img.alt = label;
+  const span = document.createElement("span");
+  span.textContent = label;
+  btn.appendChild(img);
+  btn.appendChild(span);
+  btn.addEventListener("click", onClick);
+  return btn;
+};
+
 export const updateScoreDisplay = (scoreElement, score, total) => {
   scoreElement.textContent = `Votre score : ${score} / ${total}`;
 };
