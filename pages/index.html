@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
   <body>
+    <button id="theme-toggle" type="button" aria-pressed="false">
+      Mode sombre
+    </button>
+
     <h1>Quiz Dynamique</h1>
 
     <div id="intro-screen">
@@ -13,18 +17,26 @@
         Testez vos connaissances en quelques questions chronométrées !
       </p>
       <p>Meilleur score : <span id="best-score-value">0</span></p>
+      <div id="badges-intro" class="badges-list"></div>
       <button id="start-btn">Commencer le quiz</button>
+      <button id="infinite-btn" type="button">Mode infini</button>
     </div>
 
     <div id="question-screen" style="display: none">
       <div id="progress">
-        Question <span id="current-question-index"></span> /
-        <span id="total-questions"></span>
+        Question <span id="current-question-index"></span>
+        <span id="progress-total"> / <span id="total-questions"></span></span>
       </div>
       <p id="question-text"></p>
+      <button id="audio-btn" type="button" class="hidden">Lecture</button>
       <div id="answers"></div>
+      <button id="hint-btn" type="button" class="hidden">Indice</button>
+      <p id="hint-text" class="hidden" aria-live="polite"></p>
       <div id="timer-div">Temps restant : <span id="time-left">0</span>s</div>
       <button id="next-btn" class="hidden">Question suivante</button>
+      <button id="stop-infinite-btn" type="button" class="hidden">
+        Arrêter le mode infini
+      </button>
     </div>
 
     <div id="result-screen" style="display: none">
@@ -43,6 +55,10 @@
         </thead>
         <tbody id="recap-body"></tbody>
       </table>
+      <div id="badges-result" class="badges-list"></div>
+      <p id="new-badges" class="hidden" aria-live="polite"></p>
+      <button id="share-btn">Partager</button>
+      <p id="share-link" class="hidden" aria-live="polite"></p>
       <button id="restart-btn">Recommencer</button>
     </div>
 
