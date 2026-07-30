@@ -1,45 +1,69 @@
 # Quiz Dynamique
 
-Un quiz interactif en HTML/CSS/JS permettant :
-- Un **timer** par question,
-- Un **feedback** rouge/vert immédiat,
-- Une **barre de progression** (question X/Y),
-- Une **sauvegarde du meilleur score** en localStorage.
+Quiz interactif en HTML / CSS / JavaScript natif.
+
+**Démo en ligne :** https://jerxmyy.github.io/quiz-interactif/  
+**Quiz :** https://jerxmyy.github.io/quiz-interactif/pages/index.html  
+**Repo :** https://github.com/Jerxmyy/quiz-interactif  
+**Release :** `v1.0.0`
 
 ## Fonctionnalités
 
-1. Chronomètre par question (10s, 5s…).
-2. Feedback visuel (vert/rouge).
-3. Indicateur de progression.
-4. Meilleur score stocké localement.
+### Socle
+- Chronomètre par question
+- Feedback visuel immédiat (vert / rouge)
+- Barre de progression
+- Meilleur score en `localStorage`
+
+### Sprint v1.0.0
+- Mode sombre
+- Partage du score (lien généré)
+- Indice par question
+- Mode infini
+- Badges / récompenses
+- Audio des questions (lecture vocale)
+- Mélange aléatoire des questions
+- Statistiques détaillées
+- Récapitulatif des réponses
+
+### Backlog suivant
+- Multi-thème (culture / maths / images)
+- Contre-la-montre (temps global)
+- Difficulté progressive
+- Réponses images
+- Mode Flashcard
+- Changement de langue (FR / EN)
 
 ## Installation
 
-1. Cloner ce dépôt :
-`git clone https://github.com/votre-nom/quiz-dynamique.git`
+```bash
+git clone https://github.com/Jerxmyy/quiz-interactif.git
+cd quiz-interactif
+```
 
-2. Ouvrir `index.html` dans un navigateur.
+Ouvrir `pages/index.html` (ou `index.html` qui redirige) dans un navigateur.
 
 ## Utilisation
 
-- **Démarrage** : Un bouton “Commencer le quiz” lance la première question.
-- **Réponse** : Un clic sur une proposition déclenche le feedback.
-- **Temps** : Si le chrono arrive à zéro, on bloque la question.
-- **Score final** : Indiqué en fin de quiz, compare avec le meilleur score.
-
-## Améliorations possibles
-
-- Mélanger l’ordre des questions.
-- Récapitulatif des erreurs.
-- Mode multi-thème.
-- Etc.
+- **Commencer le quiz** : mode classique mélangé
+- **Mode infini** : questions sans limite, bouton pour arrêter
+- **Indice / Lecture** : aide textuelle et audio
+- **Partager** : génère un lien contenant le score
+- **Mode sombre** : bascule de thème mémorisée
 
 ## Workflow Git
 
-- **main** : version stable.
-- **develop** : pour intégrer les nouvelles features.
-- **feature/…** : chaque fonctionnalité.
+- `main` : version stable déployée
+- `develop` : intégration des features
+- `feature/…` : une fonctionnalité
+- `release/…` : préparation de version
+- Tag `v1.0.0` : release actuelle
+
+## Documentation sprint
+
+- [Sprint Review](docs/sprint-review.md)
+- [Sprint Retrospective](docs/sprint-retrospective.md)
 
 ## Auteurs
 
-Ce projet sert d’exemple pédagogique pour comprendre la structure d’une application web simple, sa documentation et son organisation agile (backlog, user stories) et Gitflow.
+Projet pédagogique : développement web, Gitflow, Scrum (backlog, user stories, sprint).
