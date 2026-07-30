@@ -36,6 +36,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
 let timerId = null;
+let userAnswers = [];
 
 // DOM Elements
 const introScreen = getElement("#intro-screen");
@@ -52,6 +53,7 @@ const startBtn = getElement("#start-btn");
 const restartBtn = getElement("#restart-btn");
 
 const scoreText = getElement("#score-text");
+const recapBody = getElement("#recap-body");
 const timeLeftSpan = getElement("#time-left");
 
 const currentQuestionIndexSpan = getElement("#current-question-index");
@@ -70,6 +72,7 @@ function startQuiz() {
 
   currentQuestionIndex = 0;
   score = 0;
+  userAnswers = [];
 
   setText(totalQuestionsSpan, questions.length);
 
@@ -78,6 +81,7 @@ function startQuiz() {
 
 function showQuestion() {
   clearInterval(timerId);
+  let answered = false;
 
   const q = questions[currentQuestionIndex];
   setText(questionText, q.text);
@@ -85,7 +89,10 @@ function showQuestion() {
 
   answersDiv.innerHTML = "";
   q.answers.forEach((answer, index) => {
-    const btn = createAnswerButton(answer, () => selectAnswer(index, btn));
+    const btn = createAnswerButton(answer, () => {
+      answered = true;
+      selectAnswer(index, btn);
+    });
     answersDiv.appendChild(btn);
   });
 
@@ -96,6 +103,13 @@ function showQuestion() {
     q.timeLimit,
     (timeLeft) => setText(timeLeftSpan, timeLeft),
     () => {
+      if (!answered) {
+        userAnswers.push({
+          question: q.text,
+          chosen: "Pas de réponse",
+          correct: q.answers[q.correct],
+        });
+      }
       lockAnswers(answersDiv);
       nextBtn.classList.remove("hidden");
     }
@@ -106,6 +120,12 @@ function selectAnswer(index, btn) {
   clearInterval(timerId);
 
   const q = questions[currentQuestionIndex];
+  userAnswers.push({
+    question: q.text,
+    chosen: q.answers[index],
+    correct: q.answers[q.correct],
+  });
+
   if (index === q.correct) {
     score++;
     btn.classList.add("correct");
@@ -132,6 +152,25 @@ function endQuiz() {
   showElement(resultScreen);
 
   updateScoreDisplay(scoreText, score, questions.length);
+
+  recapBody.innerHTML = "";
+  userAnswers.forEach((entry) => {
+    const row = document.createElement("tr");
+
+    const questionCell = document.createElement("td");
+    questionCell.textContent = entry.question;
+
+    const chosenCell = document.createElement("td");
+    chosenCell.textContent = entry.chosen;
+
+    const correctCell = document.createElement("td");
+    correctCell.textContent = entry.correct;
+
+    row.appendChild(questionCell);
+    row.appendChild(chosenCell);
+    row.appendChild(correctCell);
+    recapBody.appendChild(row);
+  });
 
   if (score > bestScore) {
     bestScore = score;
