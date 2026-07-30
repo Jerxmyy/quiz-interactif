@@ -37,6 +37,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
 let timerId = null;
+let userAnswers = [];
 
 let correctCount = 0;
 let wrongCount = 0;
@@ -60,6 +61,7 @@ const restartBtn = getElement("#restart-btn");
 
 const scoreText = getElement("#score-text");
 const statsText = getElement("#stats-text");
+const recapBody = getElement("#recap-body");
 const timeLeftSpan = getElement("#time-left");
 
 const currentQuestionIndexSpan = getElement("#current-question-index");
@@ -82,6 +84,7 @@ function startQuiz() {
   wrongCount = 0;
   answerTimes = [];
   questions = shuffleArray(questions);
+  userAnswers = [];
 
   setText(totalQuestionsSpan, questions.length);
 
@@ -98,7 +101,10 @@ function showQuestion() {
 
   answersDiv.innerHTML = "";
   q.answers.forEach((answer, index) => {
-    const btn = createAnswerButton(answer, () => selectAnswer(index, btn));
+    const btn = createAnswerButton(answer, () => {
+      answered = true;
+      selectAnswer(index, btn);
+    });
     answersDiv.appendChild(btn);
   });
 
@@ -117,6 +123,11 @@ function showQuestion() {
         answered = true;
         wrongCount++;
         answerTimes.push(q.timeLimit);
+        userAnswers.push({
+          question: q.text,
+          chosen: "Pas de réponse",
+          correct: q.answers[q.correct],
+        });
       }
       lockAnswers(answersDiv);
       nextBtn.classList.remove("hidden");
@@ -131,6 +142,11 @@ function selectAnswer(index, btn) {
   const q = questions[currentQuestionIndex];
   const timeTaken = q.timeLimit - currentTimeLeft;
   answerTimes.push(timeTaken);
+  userAnswers.push({
+    question: q.text,
+    chosen: q.answers[index],
+    correct: q.answers[q.correct],
+  });
 
   if (index === q.correct) {
     score++;
@@ -169,6 +185,24 @@ function endQuiz() {
     statsText,
     `Bonnes réponses : ${correctCount} | Mauvaises réponses : ${wrongCount} | Temps moyen par question : ${avgTime}s`
   );
+  recapBody.innerHTML = "";
+  userAnswers.forEach((entry) => {
+    const row = document.createElement("tr");
+
+    const questionCell = document.createElement("td");
+    questionCell.textContent = entry.question;
+
+    const chosenCell = document.createElement("td");
+    chosenCell.textContent = entry.chosen;
+
+    const correctCell = document.createElement("td");
+    correctCell.textContent = entry.correct;
+
+    row.appendChild(questionCell);
+    row.appendChild(chosenCell);
+    row.appendChild(correctCell);
+    recapBody.appendChild(row);
+  });
 
   if (score > bestScore) {
     bestScore = score;
